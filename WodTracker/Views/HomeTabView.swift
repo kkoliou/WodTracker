@@ -7,6 +7,7 @@
 
 import SwiftUI
 import WodDesignSystem
+import ExercisesFeature
 
 struct HomeTabView: View {
     
@@ -36,7 +37,7 @@ struct HomeTabView: View {
                 Text("WOD")
             }
         }
-        .tint(Color.wodThird)
+        .tint(Color.wodSecond)
     }
 }
 

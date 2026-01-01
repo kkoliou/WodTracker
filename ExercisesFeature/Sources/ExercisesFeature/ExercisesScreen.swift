@@ -1,15 +1,18 @@
 //
 //  ExercisesScreen.swift
-//  WodTracker
+//  ExercisesFeature
 //
-//  Created by Konstantinos Kolioulis on 31/12/25.
+//  Created by Konstantinos Kolioulis on 1/1/26.
 //
 
 import SwiftUI
 import WodDesignSystem
 
-struct ExercisesScreen: View {
-    var body: some View {
+public struct ExercisesScreen: View {
+    
+    public init() {}
+    
+    public var body: some View {
         VStack(spacing: 8) {
             WodEmptyStateView(
                 systemImage: "figure.strengthtraining.traditional",
@@ -17,12 +20,11 @@ struct ExercisesScreen: View {
                 description: "Add your first exercise to start tracking PRs",
                 button: .init(
                     systemImage: "plus",
-                    text: "Add",
+                    text: "Add Exercise",
                     action: {}
                 )
             )
         }
-        .appBackground()
     }
 }
 

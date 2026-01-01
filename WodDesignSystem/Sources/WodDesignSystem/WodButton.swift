@@ -49,10 +49,7 @@ public struct WodButton: View {
                     }
                 }
                 .padding()
-                .background {
-                    RoundedRectangle(cornerRadius: 16)
-                        .foregroundStyle(Color.wodSecond)
-                }
+                .setGlass(withColor: Color.wodSecond)
             }
         )
     }
@@ -60,4 +57,22 @@ public struct WodButton: View {
 
 #Preview {
     WodButton(values: .init(systemImage: "plus", text: "add", action: {}))
+}
+
+private extension View {
+    @ViewBuilder
+    func setGlass(withColor color: Color) -> some View {
+        let cornerRadius: CGFloat = 16
+        if #available(iOS 26.0, *) {
+            glassEffect(
+                .regular.tint(color).interactive(),
+                in: .rect(cornerRadius: cornerRadius)
+            )
+        } else {
+            background {
+                RoundedRectangle(cornerRadius: cornerRadius)
+                    .foregroundStyle(color)
+            }
+        }
+    }
 }
