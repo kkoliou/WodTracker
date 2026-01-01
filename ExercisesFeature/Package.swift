@@ -16,14 +16,18 @@ let package = Package(
         ),
     ],
     dependencies: [
-        .package(path: "../WodDesignSystem")
+        .package(path: "../WodDesignSystem"),
+        .package(url: "https://github.com/pointfreeco/sqlite-data", from: "1.4.2")
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
             name: "ExercisesFeature",
-            dependencies: ["WodDesignSystem"]
+            dependencies: [
+                "WodDesignSystem",
+                .product(name: "SQLiteData", package: "sqlite-data")
+            ]
         ),
         .testTarget(
             name: "ExercisesFeatureTests",
