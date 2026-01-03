@@ -10,6 +10,8 @@ import WodDesignSystem
 
 public struct ExercisesScreen: View {
     
+    @State private var viewModel = ExercisesViewModel()
+    
     public init() {}
     
     public var body: some View {
@@ -21,13 +23,22 @@ public struct ExercisesScreen: View {
                 button: .init(
                     systemImage: "plus",
                     text: "Add Exercise",
-                    action: {}
+                    action: {
+                        viewModel.addExerciseButtonTapped()
+                    }
                 )
             )
+            .sheet(isPresented: $viewModel.isAddExercisePresented) {
+                NavigationStack {
+                    SearchExerciseScreen()
+                }
+            }
         }
     }
 }
 
 #Preview {
-    ExercisesScreen()
+    NavigationStack {
+        ExercisesScreen()
+    }
 }

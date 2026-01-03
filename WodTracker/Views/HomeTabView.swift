@@ -37,7 +37,8 @@ struct HomeTabView: View {
                 Text("WOD")
             }
         }
-        .tint(Color.wodSecond)
+        .tint(Color.wodPrimary)
+        .toolbarVisibility(.hidden, for: .tabBar)
     }
 }
 

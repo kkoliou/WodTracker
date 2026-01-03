@@ -49,7 +49,7 @@ public struct WodButton: View {
                     }
                 }
                 .padding()
-                .setGlass(withColor: Color.wodSecond)
+                .setGlass(withColor: Color.wodPrimary)
             }
         )
     }

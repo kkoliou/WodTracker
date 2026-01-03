@@ -32,7 +32,7 @@ public struct WodEmptyStateView: View {
                 Image(systemName: systemImage)
                     .resizable()
                     .frame(width: 80, height: 80)
-                    .foregroundStyle(Color.wodSecond)
+                    .foregroundStyle(Color.wodPrimary)
             }
             
             if let title {

@@ -11,7 +11,9 @@ import SwiftUI
 struct WodTrackerApp: App {
     var body: some Scene {
         WindowGroup {
-            HomeTabView()
+            NavigationStack {
+                HomeTabView()
+            }
         }
     }
 }
