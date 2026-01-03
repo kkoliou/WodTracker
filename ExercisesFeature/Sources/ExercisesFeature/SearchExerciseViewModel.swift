@@ -7,23 +7,50 @@
 
 import SwiftUI
 
-@Observable
+@Observable @MainActor
 class SearchExerciseViewModel {
-    let exercises = ["Power clean", "Squat clean", "Hang snatch"]
+    
+    let exercises: [String]
     var searchText: String = ""
     var isAddExerciseButtonVisible: Bool = false
+    var results = [String]()
     
-    var searchResults: [String] {
-        if searchText.isEmpty {
-            return exercises
+    init() {
+        exercises = ["Power clean", "Squat clean", "Hang snatch"]
+        results = exercises
+    }
+    
+    @concurrent
+    func searchTextTyped(_ text: String) async {
+        guard !Task.isCancelled else { return }
+
+        let lowercasedText = text.lowercased()
+        var results = [String]()
+        var alreadyExists = false
+
+        if lowercasedText.isEmpty {
+            results = exercises
         } else {
-            return exercises.filter {
-                $0.lowercased().contains(searchText.lowercased())
+            for exercise in exercises {
+                let lowercasedExercise = exercise.lowercased()
+
+                if lowercasedExercise.contains(lowercasedText) {
+                    results.append(exercise)
+                }
+
+                if lowercasedExercise == lowercasedText {
+                    alreadyExists = true
+                }
             }
         }
+
+        guard !Task.isCancelled else { return }
+
+        await MainActor.run {
+            self.results = results
+            self.isAddExerciseButtonVisible = !lowercasedText.isEmpty && !alreadyExists
+        }
     }
+
     
-    func handleAddExerciseButtonVisibility(searchText: String) {
-        isAddExerciseButtonVisible = !searchText.isEmpty
-    }
 }
