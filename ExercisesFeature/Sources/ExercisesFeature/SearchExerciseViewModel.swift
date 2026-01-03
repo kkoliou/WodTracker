@@ -32,6 +32,8 @@ class SearchExerciseViewModel {
             results = exercises
         } else {
             for exercise in exercises {
+                guard !Task.isCancelled else { return }
+                
                 let lowercasedExercise = exercise.lowercased()
 
                 if lowercasedExercise.contains(lowercasedText) {
