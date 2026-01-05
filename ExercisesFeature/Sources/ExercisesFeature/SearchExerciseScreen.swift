@@ -14,16 +14,9 @@ struct SearchExerciseScreen: View {
     @State private var searchTask: Task<Void, Never>?
     
     var body: some View {
-        ScrollView {
-            LazyVStack {
-                if viewModel.isAddExerciseButtonVisible {
-                    AddExerciseListButton(name: $viewModel.searchText, action: {})
-                        .padding()
-                }
-                ForEach(viewModel.results, id: \.self) {
-                    ExerciseListItem(text: $0)
-                        .padding(.horizontal)
-                }
+        List {
+            ForEach(viewModel.exercises, id: \.id) {
+                Text($0.name)
             }
         }
         .searchable(

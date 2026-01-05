@@ -4,34 +4,32 @@
 import PackageDescription
 
 let package = Package(
-    name: "ExercisesFeature",
+    name: "WodDB",
     platforms: [
         .iOS(.v18)
     ],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
-            name: "ExercisesFeature",
-            targets: ["ExercisesFeature"]
+            name: "WodDB",
+            targets: ["WodDB"]
         ),
     ],
     dependencies: [
-        .package(path: "../WodDesignSystem"),
-        .package(path: "../WodDB")
+        .package(url: "https://github.com/pointfreeco/sqlite-data", from: "1.4.2")
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "ExercisesFeature",
+            name: "WodDB",
             dependencies: [
-                "WodDesignSystem",
-                "WodDB"
+                .product(name: "SQLiteData", package: "sqlite-data")
             ]
         ),
         .testTarget(
-            name: "ExercisesFeatureTests",
-            dependencies: ["ExercisesFeature"]
+            name: "WodDBTests",
+            dependencies: ["WodDB"]
         ),
     ]
 )

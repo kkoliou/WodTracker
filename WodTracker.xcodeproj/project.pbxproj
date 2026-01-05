@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7D0463AC2F0C536B00687823 /* WodDB in Frameworks */ = {isa = PBXBuildFile; productRef = 7D0463AB2F0C536B00687823 /* WodDB */; };
 		7D6379852F05AED2002F2594 /* WodDesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = 7D6379842F05AED2002F2594 /* WodDesignSystem */; };
 		7D6379AA2F05D04A002F2594 /* ExercisesFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 7D6379A92F05D04A002F2594 /* ExercisesFeature */; };
 /* End PBXBuildFile section */
@@ -57,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D0463AC2F0C536B00687823 /* WodDB in Frameworks */,
 				7D6379852F05AED2002F2594 /* WodDesignSystem in Frameworks */,
 				7D6379AA2F05D04A002F2594 /* ExercisesFeature in Frameworks */,
 			);
@@ -129,6 +131,7 @@
 			packageProductDependencies = (
 				7D6379842F05AED2002F2594 /* WodDesignSystem */,
 				7D6379A92F05D04A002F2594 /* ExercisesFeature */,
+				7D0463AB2F0C536B00687823 /* WodDB */,
 			);
 			productName = WodTracker;
 			productReference = 7D6378D02F05251B002F2594 /* WodTracker.app */;
@@ -215,6 +218,7 @@
 			packageReferences = (
 				7D63796E2F05AE5D002F2594 /* XCLocalSwiftPackageReference "WodDesignSystem" */,
 				7D6379A82F05D04A002F2594 /* XCLocalSwiftPackageReference "ExercisesFeature" */,
+				7D0463AA2F0C536B00687823 /* XCLocalSwiftPackageReference "WodDB" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 7D6378D12F05251B002F2594 /* Products */;
@@ -636,6 +640,10 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
+		7D0463AA2F0C536B00687823 /* XCLocalSwiftPackageReference "WodDB" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = WodDB;
+		};
 		7D63796E2F05AE5D002F2594 /* XCLocalSwiftPackageReference "WodDesignSystem" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = WodDesignSystem;
@@ -647,6 +655,10 @@
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		7D0463AB2F0C536B00687823 /* WodDB */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = WodDB;
+		};
 		7D6379842F05AED2002F2594 /* WodDesignSystem */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 7D63796E2F05AE5D002F2594 /* XCLocalSwiftPackageReference "WodDesignSystem" */;
