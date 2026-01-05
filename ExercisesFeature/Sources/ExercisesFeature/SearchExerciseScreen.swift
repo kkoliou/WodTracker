@@ -16,7 +16,21 @@ struct SearchExerciseScreen: View {
     var body: some View {
         List {
             ForEach(viewModel.exercises, id: \.id) {
-                Text($0.name)
+                Button($0.name) {
+                    
+                }
+            }
+            .onDelete { indexSet in
+                Task {
+                    await viewModel.deleteExercises(at: indexSet)
+                }
+            }
+            if !viewModel.searchText.isEmpty {
+                Button("Add \"\(viewModel.searchText)\"") {
+                    Task {
+                        await viewModel.addExercise(viewModel.searchText)
+                    }
+                }
             }
         }
         .searchable(

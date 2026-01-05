@@ -13,6 +13,7 @@ import SQLiteData
 class SearchExerciseViewModel {
     
     @ObservationIgnored @FetchAll var exercises: [Exercise]
+    @ObservationIgnored @Dependency(\.defaultDatabase) var database
     var searchText: String = ""
     
     func searchTextTyped(_ text: String) async {
@@ -21,6 +22,38 @@ class SearchExerciseViewModel {
                 Exercise
                     .where { $0.name.contains(text) }
             )
+        }
+    }
+    
+    func deleteExercises(at offsets: IndexSet) async {
+        withErrorReporting {
+            try database.write { db in
+                try Exercise.find(offsets.map { exercises[$0].id })
+                    .delete()
+                    .execute(db)
+            }
+        }
+    }
+    
+    func addExercise(_ exercise: String) async {
+        withErrorReporting {
+            let trimmed = exercise.trimmingCharacters(in: .whitespacesAndNewlines)
+            guard !trimmed.isEmpty else { return }
+            try database.write { db in
+                let exists = try Exercise
+                    .where { $0.name == trimmed }
+                    .fetchCount(db) > 0
+                
+                guard !exists else {
+                    // TODO: present an alert
+                    return
+                }
+                
+                try Exercise.insert {
+                    Exercise.Draft(name: trimmed)
+                }
+                .execute(db)
+            }
         }
     }
 }
