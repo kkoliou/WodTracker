@@ -15,9 +15,11 @@ struct SearchExerciseScreen: View {
     
     var body: some View {
         List {
-            ForEach(viewModel.exercises, id: \.id) {
-                Button($0.name) {
-                    
+            ForEach(viewModel.exercises, id: \.id) { exercise in
+                Button(exercise.name) {
+                    Task {
+                        await viewModel.select(exercise)
+                    }
                 }
             }
             .onDelete { indexSet in

@@ -57,4 +57,15 @@ class SearchExerciseViewModel {
             }
         }
     }
+    
+    func select(_ exercise: Exercise) async {
+        withErrorReporting {
+            try database.write { db in
+                try SelectedExercise.insert {
+                    SelectedExercise.Draft(exerciseID: exercise.id)
+                }
+                .execute(db)
+            }
+        }
+    }
 }

@@ -13,19 +13,36 @@ import Foundation
     public var name: String
 }
 
+@Table public struct SelectedExercise: Identifiable, Sendable {
+    public let id: UUID
+    public let exerciseID: Exercise.ID
+}
+
 func appDatabase() throws -> any DatabaseWriter {
     let database = try SQLiteData.defaultDatabase()
     var migrator = DatabaseMigrator()
     #if DEBUG
     migrator.eraseDatabaseOnSchemaChange = true
     #endif
-    migrator.registerMigration("Create 'exercises' table") { db in
-        try #sql("""
+    migrator.registerMigration("Create 'exercises' and 'selectedExercises' table") { db in
+        try #sql(
+          """
           CREATE TABLE "exercises" (
             "id" TEXT PRIMARY KEY NOT NULL ON CONFLICT REPLACE DEFAULT (uuid()),
             "name" TEXT NOT NULL DEFAULT ''
           ) STRICT
-          """)
+          """
+        )
+        .execute(db)
+        
+        try #sql(
+          """
+          CREATE TABLE "selectedExercises" (
+            "id" TEXT PRIMARY KEY NOT NULL ON CONFLICT REPLACE DEFAULT (uuid()),
+            "exerciseID" TEXT NOT NULL REFERENCES "exercises"("id") ON DELETE CASCADE
+          ) STRICT
+          """
+        )
         .execute(db)
     }
     try migrator.migrate(database)
