@@ -46,6 +46,14 @@ struct SearchExerciseScreen: View {
         }
         .navigationTitle("Search exercice")
         .presentationDragIndicator(.visible)
+        .alert(
+            "",
+            isPresented: $viewModel.presentExerciseAlreadyAddedAlert,
+            actions: {},
+            message: {
+                Text("This exercise is already in your list.")
+            }
+        )
     }
 }
 

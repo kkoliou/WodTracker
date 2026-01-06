@@ -15,6 +15,7 @@ class SearchExerciseViewModel {
     @ObservationIgnored @FetchAll var exercises: [Exercise]
     @ObservationIgnored @Dependency(\.defaultDatabase) var database
     var searchText: String = ""
+    var presentExerciseAlreadyAddedAlert: Bool = false
     
     func searchTextTyped(_ text: String) async {
         await withErrorReporting {
@@ -44,8 +45,8 @@ class SearchExerciseViewModel {
                     .where { $0.name == trimmed }
                     .fetchCount(db) > 0
                 
-                guard !exists else {
-                    // TODO: present an alert
+                if exists {
+                    presentExerciseAlreadyAddedAlert = true
                     return
                 }
                 
